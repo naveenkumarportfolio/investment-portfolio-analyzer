@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Investment Portfolio Analyzer</title>
+  <!-- All the styling lives in style.css -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <header class="topbar">
+    <div class="topbar-inner">
+      <h1>Investment Portfolio Analyzer</h1>
+      <p class="subtitle">Analyze portfolio allocation, returns and asset exposure in seconds.</p>
+      <p class="built-with">Built with HTML, CSS, JavaScript &amp; Claude Code</p>
+    </div>
+  </header>
+
+  <main>
+
+    <!-- 1. INPUT: one row per asset. Rows are added by script.js -->
+    <section class="panel">
+      <h2>Your assets</h2>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Asset name</th>
+              <th>Amount (₹)</th>
+              <th>Return (%)</th>
+              <th>Type</th>
+              <th><span class="sr-only">Delete</span></th>
+            </tr>
+          </thead>
+          <tbody id="asset-rows"></tbody>
+        </table>
+      </div>
+
+      <!-- Shows validation messages -->
+      <p id="message" class="message" role="alert"></p>
+
+      <div class="buttons">
+        <button id="add-btn" class="btn secondary">Add asset</button>
+        <button id="analyze-btn" class="btn primary">Analyze portfolio</button>
+        <button id="reset-btn" class="btn ghost">Reset</button>
+      </div>
+    </section>
+
+    <!-- 2. DASHBOARD CARDS: numbers are filled in by script.js -->
+    <section class="cards">
+      <div class="card"><span class="label">Total investment</span><strong id="card-total">–</strong></div>
+      <div class="card"><span class="label">Portfolio return</span><strong id="card-return">–</strong></div>
+      <div class="card"><span class="label">Estimated gain</span><strong id="card-gain">–</strong></div>
+      <div class="card"><span class="label">Equity allocation</span><strong id="card-equity">–</strong></div>
+      <div class="card"><span class="label">Debt allocation</span><strong id="card-debt">–</strong></div>
+    </section>
+
+    <!-- 3. CHARTS -->
+    <section class="charts">
+      <div class="panel">
+        <h2>Portfolio allocation</h2>
+        <div class="donut-layout">
+          <div id="donut" class="donut" aria-label="Allocation donut chart"></div>
+          <ul id="legend" class="legend"></ul>
+        </div>
+      </div>
+      <div class="panel">
+        <h2>Asset return comparison</h2>
+        <div id="bars" class="bars"></div>
+      </div>
+    </section>
+
+    <!-- 4. INSIGHTS + SUMMARY -->
+    <section class="panel">
+      <h2>Highlights</h2>
+      <dl class="insights">
+        <div><dt>Most concentrated asset</dt><dd id="in-concentrated">–</dd></div>
+        <div><dt>Best-performing asset</dt><dd id="in-best">–</dd></div>
+        <div><dt>Worst-performing asset</dt><dd id="in-worst">–</dd></div>
+      </dl>
+      <h2>Portfolio summary</h2>
+      <p id="summary" class="summary">Click “Analyze portfolio” to see your summary.</p>
+    </section>
+
+    <!-- 5. METHODOLOGY: static text explaining the formulas used in script.js -->
+    <section class="panel">
+      <h2>Methodology</h2>
+      <p class="method-intro">Here is how each number on the dashboard is calculated. Σ (sigma) means “add up the results for every asset”.</p>
+
+      <div class="method">
+        <h3>Portfolio allocation</h3>
+        <p class="formula">Asset investment ÷ Total portfolio investment × 100</p>
+        <p>The share of your total money sitting in one asset. If ₹20,000 of a ₹45,000 portfolio is in one fund, that fund is 44.44% of the portfolio.</p>
+      </div>
+
+      <div class="method">
+        <h3>Weighted portfolio return</h3>
+        <p class="formula">Σ (Asset weight × Asset return)</p>
+        <p>The portfolio's overall return, where bigger investments count for more. An asset's weight is its allocation written as a decimal (44.44% = 0.4444). A ₹40,000 asset moves the result far more than a ₹4,000 one, which is why this is not a simple average.</p>
+      </div>
+
+      <div class="method">
+        <h3>Estimated gain</h3>
+        <p class="formula">Σ (Asset investment × Asset return ÷ 100)</p>
+        <p>The rupee profit (or loss) if every asset delivers its return once. Work out the gain on each asset, then add them together. A negative return gives a loss.</p>
+      </div>
+
+      <div class="method">
+        <h3>Equity allocation</h3>
+        <p class="formula">Total equity investment ÷ Total investment × 100</p>
+        <p>The percentage of your money in assets marked Equity. Add up all the Equity amounts, then divide by the total portfolio.</p>
+      </div>
+
+      <div class="method">
+        <h3>Debt allocation</h3>
+        <p class="formula">Total debt investment ÷ Total investment × 100</p>
+        <p>The same idea for assets marked Debt. Anything marked Other makes up the remaining share, so Equity, Debt and Other always add up to 100%.</p>
+      </div>
+
+      <p class="method-note">Returns are applied once and are not compounded or annualized. The figures are only as accurate as the returns you enter.</p>
+    </section>
+
+  </main>
+
+  <footer>
+    This tool is for educational and analytical purposes only. It does not provide investment advice or recommendations.
+  </footer>
+
+  <!-- All the logic lives in script.js (loaded last so the page exists first) -->
+  <script src="script.js"></script>
+</body>
+</html>

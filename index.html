@@ -1,9 +1,21 @@
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <!-- Google Analytics 4 -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-ET96L34R27"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-ET96L34R27');
+  </script>
+  <!-- End Google Analytics 4 -->
+
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Investment Portfolio Analyzer</title>
+
   <!-- All the styling lives in style.css -->
   <link rel="stylesheet" href="style.css">
 </head>
@@ -83,7 +95,7 @@
       <p id="summary" class="summary">Click “Analyze portfolio” to see your summary.</p>
     </section>
 
-    <!-- 5. METHODOLOGY: static text explaining the formulas used in script.js -->
+    <!-- 5. METHODOLOGY: formulas used in script.js -->
     <section class="panel">
       <h2>Methodology</h2>
       <p class="method-intro">Here is how each number on the dashboard is calculated. Σ (sigma) means “add up the results for every asset”.</p>
@@ -131,3 +143,4 @@
   <script src="script.js"></script>
 </body>
 </html>
+```
